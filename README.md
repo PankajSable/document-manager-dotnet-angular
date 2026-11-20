@@ -4,10 +4,27 @@ A Windows desktop application for property brokers to store, organise and find c
 
 Built with **.NET 10 Web API**, **Angular 21**, **SQL Server** and **Bootstrap 5**, and packaged as a single `DocManager.exe` that opens in its own window.
 
-<!-- Add screenshots here, for example:
-![Dashboard](docs/screenshots/dashboard.png)
-![Add document](docs/screenshots/add-document.png)
--->
+## Screenshots
+
+### Login
+<img width="1918" height="1030" alt="login" src="https://github.com/user-attachments/assets/eef8a1fb-271a-4edc-8910-fdac2e20f4dc" />
+
+
+### Clients
+<img width="1917" height="1029" alt="clients" src="https://github.com/user-attachments/assets/cf4c98c2-0e83-41a4-a472-556e2dcc24f5" />
+
+
+### Add document
+<img width="1917" height="1030" alt="add-document" src="https://github.com/user-attachments/assets/d1f97d5a-ca05-4d60-8a39-7b9084eebd2b" />
+
+
+### Search
+<img width="1916" height="1030" alt="search" src="https://github.com/user-attachments/assets/e8e8add0-1b7b-4740-872b-b406473119a9" />
+
+
+### Document view
+<img width="1917" height="1030" alt="add-document" src="https://github.com/user-attachments/assets/184c83d6-ccf0-421b-9b09-0a20a9ff65c8" />
+
 
 ## Features
 
