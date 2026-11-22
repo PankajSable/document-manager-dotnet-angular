@@ -1,0 +1,26 @@
+<div class="auth">
+  <section class="auth-hero">
+    <div class="brand p-0"><div class="brand-mark"><i class="bi bi-buildings"></i></div><span>Document Manager</span></div>
+    <h2>Every client document, in one safe place.</h2>
+    <p>Keep sale deeds, agreements and IDs organised by client, and never miss a renewal again.</p>
+    <ul>
+      <li><i class="bi bi-folder2-open"></i>A folder for every client</li>
+      <li><i class="bi bi-bell"></i>Expiry reminders on your dashboard</li>
+      <li><i class="bi bi-lock"></i>Role-based access for your team</li>
+    </ul>
+  </section>
+  <section class="auth-form-wrap">
+    <div class="auth-card">
+      <h1>Welcome back</h1>
+      <p class="text-secondary mb-4">Sign in to continue.</p>
+      <form (ngSubmit)="login()">
+        <div class="mb-3"><label class="form-label">Username</label>
+          <input class="form-control" name="username" [(ngModel)]="username" required autofocus></div>
+        <div class="mb-3"><label class="form-label">Password</label>
+          <input class="form-control" type="password" name="password" [(ngModel)]="password" required></div>
+        @if (error()) { <div class="alert alert-danger py-2 small">{{ error() }}</div> }
+        <button class="btn btn-brand w-100 py-2" [disabled]="busy()">{{ busy() ? 'Signing in…' : 'Sign in' }}</button>
+      </form>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,36 @@
+<div class="page-head"><div><h1>Search documents</h1><p>Find by client, document ID, type or date added.</p></div></div>
+<form class="card-soft card-pad mb-4" (ngSubmit)="search()">
+  <div class="row g-3 align-items-end">
+    <div class="col-md-3"><label class="form-label">Client name</label><input class="form-control" name="name" [(ngModel)]="filter.name"></div>
+    <div class="col-md-2"><label class="form-label">Document ID</label><input class="form-control" name="documentId" [(ngModel)]="filter.documentId"></div>
+    <div class="col-md-2"><label class="form-label">Type</label>
+      <select class="form-select" name="type" [(ngModel)]="filter.type"><option value="">All</option>@for (t of types; track t) { <option>{{ t }}</option> }</select></div>
+    <div class="col-md-2"><label class="form-label">Added from</label><input class="form-control" type="date" name="from" [(ngModel)]="filter.from"></div>
+    <div class="col-md-2"><label class="form-label">Added to</label><input class="form-control" type="date" name="to" [(ngModel)]="filter.to"></div>
+    <div class="col-md-1 d-grid"><button class="btn btn-brand"><i class="bi bi-search"></i></button></div>
+  </div>
+</form>
+<div class="card-soft">
+  <div class="table-responsive">
+    <table class="table table-modern">
+      <thead><tr><th>Document</th><th>Client</th><th>Property</th><th>Added</th><th>Expires</th><th></th></tr></thead>
+      <tbody>
+        @for (d of documents(); track d.id) {
+          <tr>
+            <td><div class="cell-main">{{ d.documentId }}</div><span class="type-chip">{{ d.documentType || 'Document' }}</span></td>
+            <td><span class="mini-avatar">{{ d.clientName.charAt(0).toUpperCase() }}</span>{{ d.clientName }}</td>
+            <td>{{ d.propertyAddress }}</td>
+            <td>{{ d.createdAt | date:'dd MMM yyyy' }}</td>
+            <td>{{ d.expiryDate ? (d.expiryDate | date:'dd MMM yyyy') : '—' }}</td>
+            <td class="text-end text-nowrap">
+              <a class="btn btn-soft btn-sm me-1" [routerLink]="['/view', d.id]"><i class="bi bi-eye"></i> View</a>
+              <button class="btn btn-brand btn-sm" type="button" (click)="download(d)"><i class="bi bi-download"></i></button>
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="6"><div class="empty"><i class="bi bi-inbox"></i>{{ loaded() ? 'No documents match. Try fewer filters.' : 'Loading…' }}</div></td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

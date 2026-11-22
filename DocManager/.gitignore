@@ -1,0 +1,17 @@
+# .NET / Visual Studio
+bin/
+obj/
+.vs/
+*.user
+backend/DocManager.Api/App_Data/
+backend/DocManager.Api/wwwroot/
+**/appsettings.Production.json
+
+# Angular / Node
+node_modules/
+frontend/dist/
+frontend/.angular/
+
+# Build output
+dist/
+publish/

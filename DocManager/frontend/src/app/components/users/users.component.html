@@ -1,0 +1,33 @@
+<div class="page-head"><div><h1>Users</h1><p>Admins manage everything. Staff can add, view and edit documents.</p></div></div>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <form class="card-soft card-pad" (ngSubmit)="add()">
+      <div class="section-title">New user</div>
+      <div class="mb-3"><label class="form-label">Username</label><input class="form-control" name="username" [(ngModel)]="model.username" required></div>
+      <div class="mb-3"><label class="form-label">Password</label><input class="form-control" type="password" placeholder="6+ characters" name="password" [(ngModel)]="model.password" required></div>
+      <div class="mb-3"><label class="form-label">Role</label><select class="form-select" name="role" [(ngModel)]="model.role"><option>Staff</option><option>Admin</option></select></div>
+      @if (error()) { <div class="alert alert-danger py-2 small">{{ error() }}</div> }
+      <button class="btn btn-brand">Add user</button>
+    </form>
+  </div>
+  <div class="col-lg-8">
+    <div class="card-soft"><div class="table-responsive">
+      <table class="table table-modern">
+        <thead><tr><th>User</th><th>Role</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          @for (u of users(); track u.id) {
+            <tr>
+              <td><span class="mini-avatar">{{ u.username.charAt(0).toUpperCase() }}</span><span class="cell-main">{{ u.username }}</span></td>
+              <td><select class="form-select form-select-sm w-auto" [ngModel]="u.role" (ngModelChange)="changeRole(u, $event)"><option>Staff</option><option>Admin</option></select></td>
+              <td><span class="pill" [class]="u.isActive ? 'pill pill-ok' : 'pill pill-mute'">{{ u.isActive ? 'Active' : 'Inactive' }}</span></td>
+              <td class="text-end text-nowrap">
+                <button class="btn btn-soft btn-sm me-1" (click)="toggleActive(u)">{{ u.isActive ? 'Deactivate' : 'Activate' }}</button>
+                <button class="btn btn-soft btn-sm" (click)="resetPassword(u)"><i class="bi bi-key"></i> Reset password</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div></div>
+  </div>
+</div>

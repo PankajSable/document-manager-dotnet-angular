@@ -1,0 +1,40 @@
+<div class="page-head"><div><h1>Clients</h1><p>One folder per client. Open a client to see all their documents.</p></div></div>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <form class="card-soft card-pad" (ngSubmit)="save()">
+      <div class="section-title">{{ model.id ? 'Edit client' : 'New client' }}</div>
+      <div class="mb-3"><label class="form-label">Name *</label><input class="form-control" name="name" [(ngModel)]="model.name" required></div>
+      <div class="mb-3"><label class="form-label">Phone</label><input class="form-control" name="phone" [(ngModel)]="model.phone"></div>
+      <div class="mb-3"><label class="form-label">Email</label><input class="form-control" name="email" [(ngModel)]="model.email"></div>
+      <div class="mb-3"><label class="form-label">Address</label><input class="form-control" name="address" [(ngModel)]="model.address"></div>
+      @if (error()) { <div class="alert alert-danger py-2 small">{{ error() }}</div> }
+      <button class="btn btn-brand me-2">Save client</button>
+      @if (model.id) { <button type="button" class="btn btn-soft" (click)="cancel()">Cancel</button> }
+    </form>
+  </div>
+  <div class="col-lg-8">
+    <div class="card-soft">
+      <div class="card-pad pb-2"><input class="form-control" placeholder="Search by name or phone…" name="search" [(ngModel)]="search" (ngModelChange)="load()"></div>
+      <div class="table-responsive">
+        <table class="table table-modern">
+          <thead><tr><th>Client</th><th>Phone</th><th>Documents</th><th></th></tr></thead>
+          <tbody>
+            @for (c of clients(); track c.id) {
+              <tr>
+                <td><span class="mini-avatar">{{ c.name.charAt(0).toUpperCase() }}</span><a [routerLink]="['/clients', c.id]" class="cell-main">{{ c.name }}</a></td>
+                <td>{{ c.phone }}</td>
+                <td><span class="pill pill-mute"><i class="bi bi-folder2"></i>{{ c.docCount }}</span></td>
+                <td class="text-end text-nowrap">
+                  <button class="btn btn-soft btn-sm me-1" (click)="edit(c)"><i class="bi bi-pencil"></i> Edit</button>
+                  @if (auth.isAdmin) { <button class="btn btn-ghost-danger btn-sm" (click)="delete(c)"><i class="bi bi-trash"></i></button> }
+                </td>
+              </tr>
+            } @empty {
+              <tr><td colspan="4"><div class="empty"><i class="bi bi-people"></i>No clients yet. Add the first one.</div></td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

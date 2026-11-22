@@ -1,0 +1,31 @@
+@if (client(); as c) {
+  <div class="page-head">
+    <div class="d-flex align-items-center gap-3">
+      <div class="avatar" style="width:56px;height:56px;font-size:1.4rem;border-radius:16px;background:var(--brand-soft);color:var(--brand-dark)">{{ c.name.charAt(0).toUpperCase() }}</div>
+      <div><h1>{{ c.name }}</h1>
+        <p>@if (c.phone) { <i class="bi bi-telephone me-1"></i>{{ c.phone }} }  @if (c.email) { <i class="bi bi-envelope ms-3 me-1"></i>{{ c.email }} }  @if (c.address) { <i class="bi bi-geo-alt ms-3 me-1"></i>{{ c.address }} }</p></div>
+    </div>
+    <div><a class="btn btn-soft me-2" routerLink="/clients"><i class="bi bi-arrow-left"></i> Clients</a>
+      <a class="btn btn-brand" routerLink="/docs/new" [queryParams]="{ clientId: c.id }"><i class="bi bi-plus-lg me-1"></i>Add document</a></div>
+  </div>
+  <div class="card-soft">
+    <div class="table-responsive">
+      <table class="table table-modern">
+        <thead><tr><th>Document</th><th>Property</th><th>Expires</th><th>Added</th><th></th></tr></thead>
+        <tbody>
+          @for (d of c.documents; track d.id) {
+            <tr>
+              <td><div class="cell-main">{{ d.documentId }}</div><span class="type-chip">{{ d.documentType || 'Document' }}</span></td>
+              <td>{{ d.propertyAddress }}</td>
+              <td>{{ d.expiryDate ? (d.expiryDate | date:'dd MMM yyyy') : '—' }}</td>
+              <td>{{ d.createdAt | date:'dd MMM yyyy' }}</td>
+              <td class="text-end"><a class="btn btn-soft btn-sm" [routerLink]="['/view', d.id]">Open</a></td>
+            </tr>
+          } @empty {
+            <tr><td colspan="5"><div class="empty"><i class="bi bi-folder2-open"></i>This folder is empty.</div></td></tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+}

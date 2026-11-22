@@ -1,0 +1,20 @@
+<div [class.shell]="auth.token">
+  @if (auth.token) {
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark"><i class="bi bi-buildings"></i></div><span>Document Manager</span></div>
+      <nav>
+        <a class="side-link" routerLink="/dashboard" routerLinkActive="active"><i class="bi bi-grid-1x2"></i>Dashboard</a>
+        <a class="side-link" routerLink="/clients" routerLinkActive="active"><i class="bi bi-people"></i>Clients</a>
+        <a class="side-link" routerLink="/search" routerLinkActive="active"><i class="bi bi-search"></i>Search</a>
+        <a class="side-link" routerLink="/docs/new" routerLinkActive="active"><i class="bi bi-cloud-arrow-up"></i>Add document</a>
+        @if (auth.isAdmin) { <a class="side-link" routerLink="/users" routerLinkActive="active"><i class="bi bi-shield-lock"></i>Users</a> }
+      </nav>
+      <div class="side-user">
+        <div class="avatar">{{ auth.username.charAt(0).toUpperCase() }}</div>
+        <div><div class="name">{{ auth.username }}</div><div class="role">{{ auth.role }}</div></div>
+        <button title="Log out" (click)="logout()"><i class="bi bi-box-arrow-right"></i></button>
+      </div>
+    </aside>
+  }
+  <main [class.content]="auth.token"><router-outlet /></main>
+</div>
